@@ -1,0 +1,17 @@
+{
+  "name": "stateghost", "version": "1.0.0", "private": true, "type": "module",
+  "workspaces": ["apps/*", "packages/*"],
+  "engines": {"node": ">=22.13.0"},
+  "scripts": {
+    "dev": "concurrently -k -n api,web \"npm run dev -w @stateghost/server\" \"npm run dev -w @stateghost/web\"",
+    "build": "npm run build -w @stateghost/web && npm run build -w @stateghost/server",
+    "start": "node apps/server/dist/index.js",
+    "typecheck": "tsc --noEmit -p packages/shared && npm run typecheck --workspaces --if-present",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "demo:reset": "tsx scripts/reset-demo.ts",
+    "eval:live": "tsx scripts/evaluate.ts",
+    "dev:e2e": "STATE GHOST=unused"
+  },
+  "devDependencies": {"@playwright/test": "1.56.1", "@types/node": "24.10.0", "@types/semver": "7.7.1", "@types/supertest": "6.0.3", "concurrently": "9.2.1", "esbuild": "0.25.12", "supertest": "7.1.4", "tsx": "4.20.6", "typescript": "5.9.3", "vitest": "3.2.4"}
+}

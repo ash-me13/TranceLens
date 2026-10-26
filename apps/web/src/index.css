@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom color definitions based on UI requirements:
+ * - Deep navy background
+ * - Readable neutral surfaces
+ * - Teal for observations and successful checks.
+ * - Amber for unresolved questions.
+ * - Coral for contradictions and errors.
+ */
+
+:root {
+  --color-navy-dark: #0a192f; /* Deep navy */
+  --color-surface-neutral: #1e293b; /* Neutral surfaces (slate/neutral) */
+  --color-observation-teal: #14b8a6; /* Teal */
+  --color-unresolved-amber: #f59e0b; /* Amber */
+  --color-contradiction-coral: #f43f5e; /* Coral */
+}
+
+body {
+  background-color: var(--color-navy-dark);
+  color: #e2e8f0; /* Light text */
+}

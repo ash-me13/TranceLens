@@ -1,0 +1,3 @@
+Node.js v18.19.0
+npm 10.2.0
+darwin arm64

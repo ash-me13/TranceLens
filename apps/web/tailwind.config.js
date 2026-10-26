@@ -1,0 +1,1 @@
+export default {content:['./index.html','./src/**/*.{ts,tsx}','../../demo-app/**/*.{ts,tsx}'],theme:{extend:{colors:{ink:'#0a101b',surface:'#111b2a',teal:'#64dcc6',coral:'#ff8f91',amber:'#efc078'}}},plugins:[]};
