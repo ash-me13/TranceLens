@@ -57,7 +57,7 @@ export function getRequestDetectiveEvidence(requestId: string, status: number, i
   const harContent = JSON.stringify({
     log: {
       version: '1.2',
-      creator: { name: 'StateGhost Demo Recorder', version: '1.0' },
+      creator: { name: 'TraceLens Demo Recorder', version: '1.0' },
       entries: [
         {
           startedDateTime: '2026-10-26T10:30:15.220Z',

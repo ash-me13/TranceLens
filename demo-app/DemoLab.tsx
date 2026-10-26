@@ -126,10 +126,10 @@ export function DemoLab({ onOpenInvestigation }: DemoLabProps) {
     if (isBugCFixed) {
       // Authoritative unified source
       setCheckoutItems(next);
-      localStorage.setItem('stateghost_demo_c_shared', JSON.stringify(next));
+      localStorage.setItem('tracelens_demo_c_shared', JSON.stringify(next));
     } else {
       // Buggy: Checkout uses isolated stale storage
-      localStorage.setItem('stateghost_demo_c_cart_only', JSON.stringify(next));
+      localStorage.setItem('tracelens_demo_c_cart_only', JSON.stringify(next));
     }
   };
 
@@ -178,8 +178,8 @@ export function DemoLab({ onOpenInvestigation }: DemoLabProps) {
     localStorage.removeItem(CART_STORAGE_KEY);
     localStorage.removeItem(CHECKOUT_STALE_KEY);
     localStorage.removeItem(PROFILE_STORAGE_KEY);
-    localStorage.removeItem('stateghost_demo_c_shared');
-    localStorage.removeItem('stateghost_demo_c_cart_only');
+    localStorage.removeItem('tracelens_demo_c_shared');
+    localStorage.removeItem('tracelens_demo_c_cart_only');
     tabA.resetCart();
     tabB.resetCart();
     setCartPageItems([CATALOG[0]]);
@@ -194,7 +194,7 @@ export function DemoLab({ onOpenInvestigation }: DemoLabProps) {
     setTimeout(() => setExportSuccess(null), 3500);
   };
 
-  // Pipe demo evidence directly into StateGhost
+  // Pipe demo evidence directly into TraceLens
   const handleExportToInvestigation = async () => {
     setExporting(true);
     try {
@@ -298,7 +298,7 @@ export function DemoLab({ onOpenInvestigation }: DemoLabProps) {
               <span className="px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider bg-teal-500/20 text-teal-400 border border-teal-500/30 rounded-full">
                 Interactive Playground
               </span>
-              <h2 className="text-xl font-bold text-white">StateGhost Demo Lab</h2>
+              <h2 className="text-xl font-bold text-white">TraceLens Demo Lab</h2>
             </div>
             <p className="text-sm text-slate-400 mt-1">
               Reproduce real-world state synchronization bugs, lost requests, and environment mismatches.
@@ -320,7 +320,7 @@ export function DemoLab({ onOpenInvestigation }: DemoLabProps) {
               className="flex items-center gap-2 px-4 py-2 text-xs font-semibold text-slate-950 bg-teal-400 hover:bg-teal-300 rounded-lg transition shadow-sm disabled:opacity-50"
             >
               <Send className="w-4 h-4" />
-              {exporting ? 'Sending...' : 'Send Evidence to StateGhost'}
+              {exporting ? 'Sending...' : 'Send Evidence to TraceLens'}
             </button>
           </div>
         </div>

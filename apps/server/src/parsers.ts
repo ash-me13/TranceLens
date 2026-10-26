@@ -1,7 +1,7 @@
 import {createHash} from 'node:crypto';
 import semver from 'semver';
 import {parse as parseYaml} from 'yaml';
-import type {Evidence, EvidenceKind, Observation, Ref, SetupDifference, TimelineEvent, HarEntry} from '@stateghost/shared';
+import type {Evidence, EvidenceKind, Observation, Ref, SetupDifference, TimelineEvent, HarEntry} from '@tracelens/shared';
 export const secretKey = /authorization|cookie|token|secret|password|passwd|api[-_]?key|credential/i;
 export function redact(text:string, env=false):string {
   if(env) return text.split('\n').map(l=>l.replace(/^(\s*(?:export\s+)?[A-Za-z_][\w]*\s*=)(.*)$/,(_,key,value)=>`${key}${value.trim()&&value.trim()!=='[missing]'?'[present; value redacted]':'[missing]'}`)).join('\n');

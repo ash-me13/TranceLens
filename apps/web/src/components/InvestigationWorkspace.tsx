@@ -8,7 +8,7 @@ import type {
   SetupDifference,
   Hypothesis,
   EvidenceKind
-} from '@stateghost/shared';
+} from '@tracelens/shared';
 import {
   ArrowLeft,
   Upload,
@@ -315,7 +315,7 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
 
           <a
             href={`/api/investigations/${inv.id}/export?format=markdown`}
-            download={`stateghost-${inv.id}.md`}
+            download={`tracelens-${inv.id}.md`}
             className="flex items-center gap-1 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-lg border border-slate-700 transition"
             title="Download investigation Markdown report"
           >
@@ -324,7 +324,7 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
 
           <a
             href={`/api/investigations/${inv.id}/export`}
-            download={`stateghost-${inv.id}.json`}
+            download={`tracelens-${inv.id}.json`}
             className="flex items-center gap-1 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-lg border border-slate-700 transition"
             title="Download structured JSON"
           >

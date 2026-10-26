@@ -1,7 +1,7 @@
 import {randomUUID,createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
 import path from 'node:path';
-import {ModelResult,VisionResult,type Analysis,type InvestigationDetail,type ModelMetadata,type Observation,type Ref} from '@stateghost/shared';
+import {ModelResult,VisionResult,type Analysis,type InvestigationDetail,type ModelMetadata,type Observation,type Ref} from '@tracelens/shared';
 import {boundedContent,compareSetup,timeline} from './parsers.js';
 import type {ModelProvider} from './model.js';
 import type {Store} from './store.js';
@@ -63,7 +63,7 @@ export async function analyze(store:Store,id:string,provider:ModelProvider,model
   const mapping=new Map<string,string>();
   result.hypotheses.forEach(h=>{const match=previous?.hypotheses.find(p=>p.id===h.id||p.title.toLowerCase().trim()===h.title.toLowerCase().trim());mapping.set(h.id,match?.id||`h-${createHash('sha256').update(h.title.toLowerCase().trim()).digest('hex').slice(0,10)}`);});
   result.hypotheses=result.hypotheses.map(h=>({...h,id:mapping.get(h.id)!}));result.nextQuestion.affectedHypothesisIds=result.nextQuestion.affectedHypothesisIds.map(id=>mapping.get(id)!);
-  const modelMetadata:ModelMetadata={model,timestamp:new Date().toISOString(),durationMs:Date.now()-started,...stats,provider:process.env.STATEGHOST_TEST_PROVIDER==='1'?'test':'ollama'};
+  const modelMetadata:ModelMetadata={model,timestamp:new Date().toISOString(),durationMs:Date.now()-started,...stats,provider:(process.env.TRACELENS_TEST_PROVIDER==='1'||process.env.STATEGHOST_TEST_PROVIDER==='1')?'test':'ollama'};
   const analysis:Analysis={...result,id:randomUUID(),revision:(previous?.revision||0)+1,observations:selected,modeSpecificResults,modelMetadata};
   signal.throwIfAborted();store.addAnalysis(id,analysis);return analysis;
 }

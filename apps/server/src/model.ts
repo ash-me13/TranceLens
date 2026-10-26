@@ -1,7 +1,7 @@
 import {z} from 'zod';
 import {zodToJsonSchema} from 'zod-to-json-schema';
-import type {ModelStatus} from '@stateghost/shared';
-import {SYSTEM_INSTRUCTION} from '@stateghost/shared';
+import type {ModelStatus} from '@tracelens/shared';
+import {SYSTEM_INSTRUCTION} from '@tracelens/shared';
 export interface ModelProvider {
   status(model:string,signal?:AbortSignal):Promise<ModelStatus>;
   generate<T>(schema:z.ZodType<T>,context:string,model:string,signal:AbortSignal,images?:string[],validate?:(result:T)=>void):Promise<{result:T;stats:{promptTokens?:number;completionTokens?:number;totalDurationNs?:number}}>;

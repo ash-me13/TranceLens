@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import type { Investigation, Mode, ModelStatus } from '@stateghost/shared';
+import type { Investigation, Mode, ModelStatus } from '@tracelens/shared';
 import {
   ArrowRightLeft,
   Layers,
@@ -104,7 +104,7 @@ export function Dashboard({ onOpenInvestigation, onOpenDemoLab, onOpenSettings }
           </h1>
 
           <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-            StateGhost investigates confusing software behavior using real screenshots, source code, network HAR files, logs, and environment manifests.
+            TraceLens investigates confusing software behavior using real screenshots, source code, network HAR files, logs, and environment manifests.
             Every claim is grounded in evidence—separating observed facts from model hypotheses.
           </p>
 

@@ -3,7 +3,7 @@ import { mkdtempSync, rmSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { Store } from '../src/store.js';
-import type { Evidence, Analysis, Interaction } from '@stateghost/shared';
+import type { Evidence, Analysis, Interaction } from '@tracelens/shared';
 
 describe('SQLite Store Persistence', () => {
   let tempDir: string;

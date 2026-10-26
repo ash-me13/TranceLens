@@ -1,6 +1,6 @@
 /**
  * scripts/reset-demo.ts
- * Resets StateGhost demo events and clears any demo artifacts.
+ * Resets TraceLens demo events and clears any demo artifacts.
  */
 import { Store } from '../apps/server/src/store.js';
 import path from 'node:path';
@@ -10,7 +10,7 @@ async function resetDemo() {
   const host = process.env.HOST || '127.0.0.1';
   const url = `http://${host}:${port}/api/demo/reset`;
 
-  console.log(`[StateGhost] Resetting demo state via ${url}...`);
+  console.log(`[TraceLens] Resetting demo state via ${url}...`);
 
   try {
     const res = await fetch(url, { method: 'POST', signal: AbortSignal.timeout(3000) });

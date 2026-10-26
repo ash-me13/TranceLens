@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import type { EvidenceKind } from '@stateghost/shared';
+import type { EvidenceKind } from '@tracelens/shared';
 import { X, Code, Terminal, Network, FileText, CheckCircle2 } from 'lucide-react';
 
 interface PasteEvidenceModalProps {

@@ -21,6 +21,7 @@ export default defineConfig({
       env: {
         PORT: '3001',
         HOST: '127.0.0.1',
+        TRACELENS_TEST_PROVIDER: '1',
         STATEGHOST_TEST_PROVIDER: '1',
         NODE_ENV: 'test',
         DATA_DIR: './data-test',
@@ -28,7 +29,7 @@ export default defineConfig({
       timeout: 15000,
     },
     {
-      command: 'npm run dev -w @stateghost/web',
+      command: 'npm run dev -w @tracelens/web',
       url: 'http://127.0.0.1:5173',
       reuseExistingServer: false,
       timeout: 15000,

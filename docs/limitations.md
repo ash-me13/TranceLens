@@ -1,6 +1,6 @@
-# StateGhost: Measured Limitations & Boundary Conditions
+# TraceLens: Measured Limitations & Boundary Conditions
 
-StateGhost is engineered to provide truthful, evidence-grounded investigations. In accordance with honest engineering principles, the system explicitly declares its operational boundaries, hardware trade-offs, and design constraints.
+TraceLens is engineered to provide truthful, evidence-grounded investigations. In accordance with honest engineering principles, the system explicitly declares its operational boundaries, hardware trade-offs, and design constraints.
 
 ---
 
@@ -10,7 +10,7 @@ StateGhost is engineered to provide truthful, evidence-grounded investigations. 
 - **Observed Latency**:
   - Structured reasoning and hypothesis proposal: **25 – 90 seconds** per revision, depending on context size and prompt evaluation token count.
   - Vision extraction (single screenshot): **8 – 18 seconds**.
-- **Mitigation**: StateGhost utilizes background jobs with live stage reporting (`Reading evidence` → `Analyzing screenshots` → `Comparing explanations` → `Validating results`) so the browser UI never freezes during inference. A 180-second timeout and instant client-side cancellation protect against runaway execution.
+- **Mitigation**: TraceLens utilizes background jobs with live stage reporting (`Reading evidence` → `Analyzing screenshots` → `Comparing explanations` → `Validating results`) so the browser UI never freezes during inference. A 180-second timeout and instant client-side cancellation protect against runaway execution.
 
 ---
 
@@ -23,7 +23,7 @@ StateGhost is engineered to provide truthful, evidence-grounded investigations. 
 
 ### 3. Cross-Machine Clock Skew & Causal Uncertainty
 - **Clock Drift**: Client browsers, developer laptops, and remote servers frequently have unsynchronized system clocks.
-- **Principle**: StateGhost strictly preserves original timestamps and ISO-8601 strings. It never assumes upload time is event time, and it never synthesizes a false causal ordering when clock uncertainty exists. Correlation is prioritized via explicit request IDs (`X-Request-ID`, `traceparent`).
+- **Principle**: TraceLens strictly preserves original timestamps and ISO-8601 strings. It never assumes upload time is event time, and it never synthesizes a false causal ordering when clock uncertainty exists. Correlation is prioritized via explicit request IDs (`X-Request-ID`, `traceparent`).
 
 ---
 
@@ -43,5 +43,5 @@ StateGhost is engineered to provide truthful, evidence-grounded investigations. 
 ---
 
 ### 6. No Autonomous Destructive Actions
-- **Safe Diagnostic Steps**: In Setup Forensics, StateGhost generates copyable diagnostic shell commands with explanatory rationale.
-- **Safety Rule**: StateGhost **never** executes commands or alters environment variables automatically on the developer's system.
+- **Safe Diagnostic Steps**: In Setup Forensics, TraceLens generates copyable diagnostic shell commands with explanatory rationale.
+- **Safety Rule**: TraceLens **never** executes commands or alters environment variables automatically on the developer's system.

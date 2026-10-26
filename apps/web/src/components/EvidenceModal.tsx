@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import type { Evidence, Observation, Ref } from '@stateghost/shared';
+import type { Evidence, Observation, Ref } from '@tracelens/shared';
 import { X, Check, Edit2, ShieldAlert, FileText, Image as ImageIcon, Network, Terminal } from 'lucide-react';
 
 interface EvidenceModalProps {

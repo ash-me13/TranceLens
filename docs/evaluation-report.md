@@ -1,14 +1,14 @@
-# StateGhost: Evaluation and Verification Report
+# TraceLens: Evaluation and Verification Report
 
 > **“Never replace a failed model response with an undisclosed hardcoded diagnosis. Never fabricate evaluation scores or claim tests passed when they were not run.”**
 
-This document provides the verified testing and live Gemma 4 evaluation results for StateGhost across all test suites, browser journeys, and real local model inferences.
+This document provides the verified testing and live Gemma 4 evaluation results for TraceLens across all test suites, browser journeys, and real local model inferences.
 
 ---
 
 ## 1. Automated Vitest Test Suite (Unit & Integration)
 
-StateGhost includes 30 automated unit and integration tests across parser logic, SQLite persistence, and the shared investigation engine.
+TraceLens includes 30 automated unit and integration tests across parser logic, SQLite persistence, and the shared investigation engine.
 
 - **Command**: `npm test`
 - **Runner**: Vitest v4
@@ -28,7 +28,7 @@ StateGhost includes 30 automated unit and integration tests across parser logic,
 
 ## 2. End-to-End User Journeys (Playwright)
 
-StateGhost includes 6 comprehensive Playwright end-to-end browser journeys executing in real browser windows against the full-stack web application.
+TraceLens includes 6 comprehensive Playwright end-to-end browser journeys executing in real browser windows against the full-stack web application.
 
 - **Command**: `npm run test:e2e`
 - **Runner**: `@playwright/test` using Chrome channel
@@ -68,7 +68,7 @@ StateGhost includes 6 comprehensive Playwright end-to-end browser journeys execu
 
 ## 3. Live Gemma 4 Evaluation Harness
 
-StateGhost includes a dedicated live evaluation script (`scripts/evaluate.ts`) that executes real inference against the local Ollama instance (`http://127.0.0.1:11434`, model `gemma4:e4b-it-q4_K_M`, 7.5B parameters).
+TraceLens includes a dedicated live evaluation script (`scripts/evaluate.ts`) that executes real inference against the local Ollama instance (`http://127.0.0.1:11434`, model `gemma4:e4b-it-q4_K_M`, 7.5B parameters).
 
 - **Command**: `npm run eval:live`
 - **Model**: `gemma4:e4b` (quantization `Q4_K_M`, 6.6 GB GGUF)
@@ -99,7 +99,7 @@ StateGhost includes a dedicated live evaluation script (`scripts/evaluate.ts`) t
 ## 4. Engineering Findings & Insights from Live Evaluation
 
 1. **Strict Rejection of Ungrounded Claims Works**:
-   - In `setup-failure-2`, the local model attempted to propose an `observed` graph claim without providing citations to the supplied environment manifest. StateGhost's `validateResult` rejected the output, prompted for a repair attempt, and upon failure threw a recoverable error rather than persisting an ungrounded claim.
+   - In `setup-failure-2`, the local model attempted to propose an `observed` graph claim without providing citations to the supplied environment manifest. TraceLens's `validateResult` rejected the output, prompted for a repair attempt, and upon failure threw a recoverable error rather than persisting an ungrounded claim.
 2. **Token Generation Budgets on CPU/Metal**:
    - On a host under memory pressure, generating 2,500 structured tokens under strict JSON grammar takes ~2.5 to 3.5 minutes.
    - When prompts are concise (e.g., `state-bug-3`, `setup-failure-3`, `insufficient-evidence-1`), the model produces complete, highly calibrated structured outputs in 67s to 139s that pass all 5 verification dimensions.

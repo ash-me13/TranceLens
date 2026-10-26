@@ -5,7 +5,7 @@ import {readFileSync,writeFileSync} from 'node:fs';
 import path from 'node:path';
 import sharp from 'sharp';
 import {z} from 'zod';
-import {CreateInvestigation,AddText,AnswerInput,type Evidence,type Job,type Mode,type Analysis} from '@stateghost/shared';
+import {CreateInvestigation,AddText,AnswerInput,type Evidence,type Job,type Mode,type Analysis} from '@tracelens/shared';
 import {Store} from './store.js';
 import {Ollama,isGemma4,type ModelProvider} from './model.js';
 import {analyze} from './engine.js';
@@ -17,8 +17,8 @@ export function createApp(store:Store,provider:ModelProvider=new Ollama()) {
   const active=(id:string)=>[...jobs.values()].find(j=>j.investigationId===id&&j.status==='running');
   const model=()=>store.setting('model')||process.env.OLLAMA_MODEL||'gemma4:e4b';
   const asyncRoute=(fn:(req:Request,res:Response)=>Promise<any>|any)=>(req:Request,res:Response,next:NextFunction)=>Promise.resolve().then(()=>fn(req,res)).catch(next);
-  app.use('/api',(req,res,next)=>{res.setHeader('Cache-Control','no-store');res.setHeader('X-Content-Type-Options','nosniff');const origin=req.headers.origin;if(!['GET','HEAD','OPTIONS'].includes(req.method)&&origin){const u=new URL(origin);if(!['localhost','127.0.0.1','[::1]'].includes(u.hostname))return res.status(403).json({error:'Only local browser origins may mutate StateGhost data.'});}next();});
-  app.get('/api/health',(_req,res)=>res.json({status:'ok',provider:process.env.STATEGHOST_TEST_PROVIDER==='1'?'test':'ollama',storage:'SQLite'}));
+  app.use('/api',(req,res,next)=>{res.setHeader('Cache-Control','no-store');res.setHeader('X-Content-Type-Options','nosniff');const origin=req.headers.origin;if(!['GET','HEAD','OPTIONS'].includes(req.method)&&origin){const u=new URL(origin);if(!['localhost','127.0.0.1','[::1]'].includes(u.hostname))return res.status(403).json({error:'Only local browser origins may mutate TraceLens data.'});}next();});
+  app.get('/api/health',(_req,res)=>res.json({status:'ok',provider:(process.env.TRACELENS_TEST_PROVIDER==='1'||process.env.STATEGHOST_TEST_PROVIDER==='1')?'test':'ollama',storage:'SQLite'}));
   app.get('/api/model/status',asyncRoute(async(_req,res)=>res.json(await provider.status(model()))));
   app.post('/api/model/test',asyncRoute(async(req,res)=>{
     const selected=z.object({model:z.string().optional()}).parse(req.body||{}).model||model();if(!isGemma4(selected))throw new Error('Select an installed local Gemma 4 model.');
@@ -72,7 +72,7 @@ export function createApp(store:Store,provider:ModelProvider=new Ollama()) {
     store.addInteraction(inv.id,{...input,text:redact(input.text),id:randomUUID(),kind,createdAt:new Date().toISOString(),basedOnRevision:latest.revision});res.status(202).json(startJob(inv.id));
   }));
   app.get('/api/investigations/:id/export',(req,res)=>{
-    const inv=store.get(req.params.id)!;const markdown=req.query.format==='markdown';const ext=markdown?'md':'json';res.attachment(`stateghost-${inv.id}.${ext}`);
+    const inv=store.get(req.params.id)!;const markdown=req.query.format==='markdown';const ext=markdown?'md':'json';res.attachment(`tracelens-${inv.id}.${ext}`);
     if(!markdown)return res.json({...inv,limitations:['Interpretations are model hypotheses, not confirmed root causes.','Vision observations remain unverified until user confirmation.','Exports include redacted text and image citations; screenshot pixels are retained locally and not embedded.','Cross-machine clock ordering is uncertain.']});
     const text=`# ${inv.title}\n\n${inv.sample?'Sample investigation — recorded example.':'Local investigation.'}\n\nMode: ${inv.mode}\n\n## Evidence\n${inv.evidence.map(e=>`- [${e.id}] ${e.displayName} — ${e.sourceLabel}; uploaded ${e.uploadedAt}; event time ${e.userTimestamp||'not supplied'}\n  Warnings: ${[...e.warnings,...e.report.truncation].join('; ')}`).join('\n')}\n\n${inv.analyses.map(a=>`## Revision ${a.revision}\n${a.summary}\n\n${a.observations.map(o=>`- ${o.id}: ${o.statement} (${o.origin}, ${o.verification}) ${o.evidenceRefs.map(r=>`[${r.evidenceId}: ${r.locator}${r.region?` / ${r.region}`:''}]`).join(' ')}`).join('\n')}\n\n${a.hypotheses.map(h=>`### ${h.title} — ${h.status}, ${h.evidenceStrength}\n${h.explanation}\nSupport: ${h.supportingObservationIds.join(', ')}\nCounterevidence: ${h.contradictingObservationIds.join(', ')||'None supplied'}\nTest: ${h.distinguishingTest.action}\n${h.distinguishingTest.expectedOutcomes.map((o,i)=>`- ${o}: ${h.distinguishingTest.interpretationForEachOutcome[i]}`).join('\n')}`).join('\n\n')}\nMissing: ${a.missingEvidence.join('; ')}\nQuestion: ${a.nextQuestion.question}\nWhy: ${a.nextQuestion.whyUseful}\nChanged: ${a.changes}\nModel metadata: ${JSON.stringify(a.modelMetadata)}`).join('\n\n')}\n\n## User reports\n${inv.interactions.map(i=>`- ${i.createdAt} / revision ${i.basedOnRevision} / ${i.kind}: ${i.text}`).join('\n')}\n\n## Limitations\nHypotheses are interpretations. User reports and vision extractions are not independently verified. Clock order across machines is uncertain. Screenshots are cited but not embedded. Review redactions before sharing.\n`;res.type('text/markdown').send(text);
   });

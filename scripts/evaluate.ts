@@ -1,6 +1,6 @@
 /**
  * scripts/evaluate.ts
- * Live Gemma 4 evaluation harness for StateGhost.
+ * Live Gemma 4 evaluation harness for TraceLens.
  * Evaluates real investigations across all modes and reports actual measured metrics.
  */
 import { Ollama, isGemma4 } from '../apps/server/src/model.js';
@@ -10,7 +10,7 @@ import { enrich, detectKind } from '../apps/server/src/parsers.js';
 import { readFileSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
-import type { Evidence, Mode } from '@stateghost/shared';
+import type { Evidence, Mode } from '@tracelens/shared';
 
 interface TestCase {
   id: string;
@@ -127,7 +127,7 @@ async function runEvaluation() {
   const provider = new Ollama();
 
   console.log('====================================================');
-  console.log(' StateGhost Live Gemma 4 Evaluation Harness');
+  console.log(' TraceLens Live Gemma 4 Evaluation Harness');
   console.log('====================================================');
   console.log(`Checking connection to local Ollama at ${provider.base}...`);
 
@@ -140,7 +140,7 @@ async function runEvaluation() {
 
   if (!status.available) {
     console.error('❌ Model is unavailable for live evaluation. Please run: ollama pull ' + modelName);
-    console.error('StateGhost will not fabricate results or claim tests passed when not run.');
+    console.error('TraceLens will not fabricate results or claim tests passed when not run.');
     process.exit(1);
   }
 

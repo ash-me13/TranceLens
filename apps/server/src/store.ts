@@ -1,13 +1,14 @@
 import { DatabaseSync } from 'node:sqlite';
-import { mkdirSync, rmSync } from 'node:fs';
+import { existsSync, mkdirSync, rmSync } from 'node:fs';
 import path from 'node:path';
 import {randomUUID} from 'node:crypto';
-import type {Investigation, InvestigationDetail, Evidence, Analysis, Interaction, Mode} from '@stateghost/shared';
+import type {Investigation, InvestigationDetail, Evidence, Analysis, Interaction, Mode} from '@tracelens/shared';
 export class Store {
   db:DatabaseSync; dir:string;
   constructor(dir:string) {
     this.dir=path.resolve(dir);mkdirSync(this.dir,{recursive:true});mkdirSync(path.join(this.dir,'evidence'),{recursive:true});
-    this.db=new DatabaseSync(path.join(this.dir,'stateghost.sqlite'));
+    const dbFile = existsSync(path.join(this.dir,'stateghost.sqlite')) && !existsSync(path.join(this.dir,'tracelens.sqlite')) ? 'stateghost.sqlite' : 'tracelens.sqlite';
+    this.db=new DatabaseSync(path.join(this.dir,dbFile));
     this.db.exec(`PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON;
       CREATE TABLE IF NOT EXISTS investigations(id TEXT PRIMARY KEY, data TEXT NOT NULL);
       CREATE TABLE IF NOT EXISTS evidence(id TEXT PRIMARY KEY, investigationId TEXT REFERENCES investigations(id) ON DELETE CASCADE, data TEXT NOT NULL);

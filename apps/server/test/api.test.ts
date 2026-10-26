@@ -7,13 +7,13 @@ import { createApp } from '../src/app.js';
 import { Store } from '../src/store.js';
 import { testProvider } from '../src/test-provider.js';
 
-describe('StateGhost API Integration', () => {
+describe('TraceLens API Integration', () => {
   let tempDir: string;
   let store: Store;
   let app: ReturnType<typeof createApp>;
 
   beforeEach(() => {
-    tempDir = mkdtempSync(path.join(tmpdir(), 'stateghost-api-test-'));
+    tempDir = mkdtempSync(path.join(tmpdir(), 'tracelens-api-test-'));
     store = new Store(tempDir);
     app = createApp(store, testProvider);
   });

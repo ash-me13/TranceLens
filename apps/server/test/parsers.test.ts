@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { redact, parseHar, detectKind, validateName, compareSetup, timeline, enrich, boundedContent } from '../src/parsers.js';
-import type { Evidence } from '@stateghost/shared';
+import type { Evidence } from '@tracelens/shared';
 
 describe('Secret Redaction', () => {
   it('redacts authorization bearer tokens', () => {

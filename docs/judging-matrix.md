@@ -1,4 +1,4 @@
-# StateGhost Feature-to-Evidence Judging Matrix
+# TraceLens Feature-to-Evidence Judging Matrix
 
 | Dimension | Mandatory Requirement | Implementation Location | Verified Evidence & Test Coverage |
 | :--- | :--- | :--- | :--- |

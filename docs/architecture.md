@@ -1,14 +1,14 @@
-# StateGhost System Architecture
+# TraceLens System Architecture
 
 ```
                   ┌────────────────────────────────────────────────────────┐
-                  │                 StateGhost Web App                     │
+                  │                 TraceLens Web App                      │
                   │   (React 18 + TypeScript + Vite + Tailwind + XYFlow)   │
                   └──────────────────────────┬─────────────────────────────┘
                                              │ HTTP & SSE Proxied via :5173
                                              ▼
                   ┌────────────────────────────────────────────────────────┐
-                  │                StateGhost API Server                   │
+                  │                TraceLens API Server                    │
                   │         (Node.js + Express + SQLite Database)          │
                   └──────┬───────────────────┬──────────────────────┬──────┘
                          │                   │                      │

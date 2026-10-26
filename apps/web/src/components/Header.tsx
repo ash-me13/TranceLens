@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Zap, LayoutGrid, Plus, Settings as SettingsIcon, Flame, Cpu, Eye } from 'lucide-react';
-import type { ModelStatus } from '@stateghost/shared';
+import type { ModelStatus } from '@tracelens/shared';
 
 interface HeaderProps {
   currentView: 'dashboard' | 'investigation' | 'settings' | 'demo';
@@ -31,7 +31,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, onNavigate, onNewIn
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-lg font-black text-white tracking-tight">StateGhost</span>
+              <span className="text-lg font-black text-white tracking-tight">TraceLens</span>
               <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-800 text-teal-400 border border-teal-800/40">
                 Gemma 4
               </span>

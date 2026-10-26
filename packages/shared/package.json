@@ -1,1 +1,1 @@
-{"name":"@stateghost/shared","version":"1.0.0","type":"module","exports":"./src/index.ts","dependencies":{"zod":"3.25.76"}}
+{"name":"@tracelens/shared","version":"1.0.0","type":"module","exports":"./src/index.ts","dependencies":{"zod":"3.25.76"}}

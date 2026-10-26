@@ -10,7 +10,7 @@ import {
   Handle
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
-import type { GraphNode, GraphEdge, Ref } from '@stateghost/shared';
+import type { GraphNode, GraphEdge, Ref } from '@tracelens/shared';
 import { Eye, HelpCircle, Sparkles } from 'lucide-react';
 
 interface StateGraphProps {

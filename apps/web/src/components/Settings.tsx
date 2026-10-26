@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import type { ModelStatus } from '@stateghost/shared';
+import type { ModelStatus } from '@tracelens/shared';
 import {
   Settings as SettingsIcon,
   Cpu,
@@ -82,7 +82,7 @@ export function Settings() {
             <span>Local Gemma 4 Inference Settings</span>
           </h2>
           <p className="text-xs text-slate-400 mt-1">
-            StateGhost runs inference entirely through your local Ollama instance on loopback (127.0.0.1:11434).
+            TraceLens runs inference entirely through your local Ollama instance on loopback (127.0.0.1:11434).
             No telemetry, no external API keys, zero cloud egress.
           </p>
         </div>
@@ -161,7 +161,7 @@ export function Settings() {
               )}
             </select>
             <p className="text-[11px] text-slate-400">
-              StateGhost discovers installed models and capabilities dynamically via <code className="text-teal-300">/api/tags</code> and <code className="text-teal-300">/api/show</code>.
+              TraceLens discovers installed models and capabilities dynamically via <code className="text-teal-300">/api/tags</code> and <code className="text-teal-300">/api/show</code>.
             </p>
           </div>
 
@@ -238,7 +238,7 @@ export function Settings() {
           </div>
 
           <p className="text-slate-400 text-[11px]">
-            * Note: Model download size (approx. 6.6 GB) is disk storage. StateGhost uses strict JSON schemas, low temperature (0.1), and streaming: false for guaranteed parseable output.
+            * Note: Model download size (approx. 6.6 GB) is disk storage. TraceLens uses strict JSON schemas, low temperature (0.1), and streaming: false for guaranteed parseable output.
           </p>
         </div>
       </div>

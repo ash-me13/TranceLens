@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import path from 'node:path';
 
-test.describe('StateGhost End-to-End User Journeys', () => {
+test.describe('TraceLens End-to-End User Journeys', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
     await page.waitForLoadState('domcontentloaded');

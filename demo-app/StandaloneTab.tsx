@@ -13,7 +13,7 @@ export function StandaloneTab({ tab }: { tab: 'Tab A' | 'Tab B' }) {
         <div className="flex items-center justify-between border-b border-slate-800 pb-3">
           <div>
             <h1 className="text-xl font-black text-white">{tab}</h1>
-            <p className="text-xs text-slate-400">StateGhost Real Browser Window Test</p>
+            <p className="text-xs text-slate-400">TraceLens Real Browser Window Test</p>
           </div>
           <div className="text-right">
             <div className="text-2xl font-black text-teal-400 font-mono">

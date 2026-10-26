@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { validateResult } from '../src/engine.js';
-import type { ModelResult, InvestigationDetail, Observation } from '@stateghost/shared';
+import type { ModelResult, InvestigationDetail, Observation } from '@tracelens/shared';
 
 describe('Investigation Engine Validation', () => {
   const baseInvestigation: InvestigationDetail = {

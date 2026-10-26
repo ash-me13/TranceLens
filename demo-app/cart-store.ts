@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { DemoCartItem, CATALOG } from './types';
 
-export const CART_STORAGE_KEY = 'stateghost_demo_cart';
-export const CHECKOUT_STALE_KEY = 'stateghost_demo_checkout_stale';
-export const PROFILE_STORAGE_KEY = 'stateghost_demo_profile';
+export const CART_STORAGE_KEY = 'tracelens_demo_cart';
+export const CHECKOUT_STALE_KEY = 'tracelens_demo_checkout_stale';
+export const PROFILE_STORAGE_KEY = 'tracelens_demo_profile';
 
 export function getStoredCart(): DemoCartItem[] {
   try {

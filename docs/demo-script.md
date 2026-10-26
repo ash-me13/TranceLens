@@ -1,4 +1,4 @@
-# StateGhost 3-Minute Demonstration Script
+# TraceLens 3-Minute Demonstration Script
 
 **Tagline**: *“Find where your app’s story breaks.”*  
 **Presenter**: Senior Full-Stack & AI Systems Engineer  
@@ -7,19 +7,19 @@
 ---
 
 ### Segment 1: The Problem (0:00 – 0:20)
-- **Action**: Open the StateGhost Demo Lab in browser.
+- **Action**: Open the TraceLens Demo Lab in browser.
 - **Narrative**:
-  > *"Have you ever had a user report that their cart total showed $42.00, while their checkout screen said $24.00? In front of me are two real browser tabs for the same session. In Tab A, I add a mechanical keyboard—the UI updates to $42.00. But in Tab B, the UI stubbornly stays at $24.00. Most developers jump between React DevTools, local storage, and server logs guessing what broke. StateGhost eliminates the guesswork."*
+  > *"Have you ever had a user report that their cart total showed $42.00, while their checkout screen said $24.00? In front of me are two real browser tabs for the same session. In Tab A, I add a mechanical keyboard—the UI updates to $42.00. But in Tab B, the UI stubbornly stays at $24.00. Most developers jump between React DevTools, local storage, and server logs guessing what broke. TraceLens eliminates the guesswork."*
 
 ---
 
 ### Segment 2: Evidence Ingestion (0:20 – 0:50)
 - **Action**:
-  1. Click **"Send Evidence to StateGhost"** or open a new **State Conflicts** investigation.
+  1. Click **"Send Evidence to TraceLens"** or open a new **State Conflicts** investigation.
   2. Show uploaded logs from Tab A and Tab B alongside `CartContext.tsx`.
   3. Show deterministic secret redaction: bearer tokens and session keys are sanitized to `[REDACTED]`.
 - **Narrative**:
-  > *"StateGhost treats code, logs, and screenshots as untrusted evidence. Notice our Ingestion Report: common authorization headers and secret tokens are sanitized locally before anything touches the model. We can view the source with real line numbers and inspect our browser logs."*
+  > *"TraceLens treats code, logs, and screenshots as untrusted evidence. Notice our Ingestion Report: common authorization headers and secret tokens are sanitized locally before anything touches the model. We can view the source with real line numbers and inspect our browser logs."*
 
 ---
 
@@ -29,7 +29,7 @@
   2. Point out the transparent progress stages: `Reading evidence` → `Analyzing screenshots` → `Comparing explanations` → `Validating results`.
   3. Inspect the resulting **State Conflict Graph** and **Competing Hypotheses**.
 - **Narrative**:
-  > *"StateGhost calls our local Gemma 4 instance via Ollama on loopback. Notice the honest progress stages and zero cloud calls. Gemma returns a strictly schema-validated diagnosis:*
+  > *"TraceLens calls our local Gemma 4 instance via Ollama on loopback. Notice the honest progress stages and zero cloud calls. Gemma returns a strictly schema-validated diagnosis:*
   > *Look at our State Conflict Graph: the UI layer is labeled as **observed**, but the React memory and Storage sync are labeled as **inferred** with explicit citations to lines in `CartContext.tsx`.*
   > *Gemma presents two competing explanations: (1) Missing storage event listener across tabs, vs (2) Separate user sessions or delay in storage write."*
 
@@ -41,7 +41,7 @@
   2. Select **"Yes"** and click **"Submit Answer & Update"**.
   3. Highlight the creation of **Revision 2** and the **Changelog**.
 - **Narrative**:
-  > *"Rather than forcing an ungrounded guess, StateGhost asks one decisive question: 'Does refreshing Tab B synchronize the cart?' When we answer 'Yes', StateGhost saves Revision 2. Notice how hypothesis identities are preserved, and the explanation explains what changed: stale in-memory state is now strongly supported, while a broken database write is ruled out."*
+  > *"Rather than forcing an ungrounded guess, TraceLens asks one decisive question: 'Does refreshing Tab B synchronize the cart?' When we answer 'Yes', TraceLens saves Revision 2. Notice how hypothesis identities are preserved, and the explanation explains what changed: stale in-memory state is now strongly supported, while a broken database write is ruled out."*
 
 ---
 
@@ -63,4 +63,4 @@
   3. Show the **Settings** panel with Gemma 4 capabilities (`vision`, `completion`, `thinking`).
 - **Narrative**:
   > *"In Request Detective, we trace a button click through HAR entries and server logs to catch unhandled 500 errors that trap spinners. In Setup Forensics, we deterministically audit Node version incompatibility and missing env variables.*
-  > *All of this runs 100% locally with Gemma 4. StateGhost: Find where your app's story breaks."*
+  > *All of this runs 100% locally with Gemma 4. TraceLens: Find where your app's story breaks."*

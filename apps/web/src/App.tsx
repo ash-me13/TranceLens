@@ -6,7 +6,7 @@ import { Settings } from './components/Settings';
 import { DemoLab } from '../../../demo-app/DemoLab';
 import { StandaloneTab } from '../../../demo-app/StandaloneTab';
 import { NewInvestigationModal } from './components/NewInvestigationModal';
-import type { Mode } from '@stateghost/shared';
+import type { Mode } from '@tracelens/shared';
 
 type View = 'dashboard' | 'investigation' | 'settings' | 'demo';
 

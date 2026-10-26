@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import type { Mode } from '@stateghost/shared';
+import type { Mode } from '@tracelens/shared';
 import { X, ArrowRightLeft, Layers, Laptop, Sparkles } from 'lucide-react';
 
 interface NewInvestigationModalProps {

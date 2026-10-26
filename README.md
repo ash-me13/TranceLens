@@ -1,14 +1,14 @@
-# StateGhost
+# TraceLens
 
 > **“Find where your app’s story breaks.”**
 
-StateGhost is an evidence-grounded debugging assistant powered by local **Google Gemma 4** running via Ollama. It helps developers investigate confusing software behavior using screenshots, source code, network HAR exports, logs, and environment manifests.
+TraceLens is an evidence-grounded debugging assistant powered by local **Google Gemma 4** running via Ollama. It helps developers investigate confusing software behavior using screenshots, source code, network HAR exports, logs, and environment manifests.
 
 ---
 
 ## 1. Product Purpose & Three Investigation Modes
 
-Most software bugs are not simple syntax errors—they are contradictions between what an interface displays and what application memory or the backend actually stores. StateGhost provides three specialized investigation modes sharing an evidence library and an interactive investigation engine:
+Most software bugs are not simple syntax errors—they are contradictions between what an interface displays and what application memory or the backend actually stores. TraceLens provides three specialized investigation modes sharing an evidence library and an interactive investigation engine:
 
 1. **State Conflicts** (*“Why does my app contradict itself?”*)
    - Traces the gap between what your interface shows and what your app remembers.
@@ -19,10 +19,10 @@ Most software bugs are not simple syntax errors—they are contradictions betwee
    - Correlates events via explicit request/correlation IDs (`X-Request-ID`) and flags timing uncertainties.
 3. **Setup Forensics** (*“It works on their laptop. Why not mine?”*)
    - Side-by-side deterministic environment checks: Node engines semver compatibility, package manager versions, manifest/lockfile consistency, and required environment variables.
-   - Safe copyable diagnostic steps (StateGhost **never** executes commands automatically on the user's system).
+   - Safe copyable diagnostic steps (TraceLens **never** executes commands automatically on the user's system).
 
 ### The Five-Layer Rigor Principle
-StateGhost strictly distinguishes between five categories of information:
+TraceLens strictly distinguishes between five categories of information:
 - **Observed Evidence**: Facts proven directly by code lines, logs, or confirmed visual extractions.
 - **Model Interpretations**: Inductive explanations proposed by Gemma 4, never asserted as raw ground truth.
 - **Suspected Explanations**: Competing hypotheses categorized with qualitative evidence strength (`low`, `medium`, `high`).
@@ -33,7 +33,7 @@ StateGhost strictly distinguishes between five categories of information:
 
 ## 2. Technology Stack & Workspace Architecture
 
-StateGhost is structured as an npm workspace with strict TypeScript typing:
+TraceLens is structured as an npm workspace with strict TypeScript typing:
 
 ```
 ├── apps/
@@ -43,7 +43,7 @@ StateGhost is structured as an npm workspace with strict TypeScript typing:
 │   └── shared/       # Shared Zod schemas, domain models, and system prompts
 ├── demo-app/         # Real React demo lab with reproducible state & request bugs
 ├── fixtures/         # Reproducible test fixtures for setup, state, and request modes
-├── docs/             # Architecture, demo script, judging matrix, limitations, Gemma 4 guide
+├── docs/             # Architecture, demo script, judging matrix, limitations, Gemma 4 guide, eval report
 ├── scripts/          # reset-demo.ts, evaluate.ts
 └── tests/
     └── e2e/          # Playwright user journey tests with real browser tabs
@@ -83,7 +83,7 @@ Open your browser to: **`http://127.0.0.1:5173`**
 ### Hardware & Memory Notes
 - **Download Size vs Runtime Memory**: The GGUF Q4_K_M weights take approximately 6.6 GB on disk. At runtime, the model allocates approximately 4.5 GB to 7.0 GB of memory (RAM/VRAM) depending on context length (`num_ctx: 16384`).
 - **Tested Hardware**: Apple Silicon Mac (M-series with unified memory). Inference times range from 25s to 90s per structured revision.
-- **Local Loopback Only**: All inference calls query `http://127.0.0.1:11434`. No external API keys or cloud connections are required. StateGhost is air-gapped capable; typography uses bundled Inter WOFF2 fonts without any CDN dependency.
+- **Local Loopback Only**: All inference calls query `http://127.0.0.1:11434`. No external API keys or cloud connections are required. TraceLens is air-gapped capable; typography uses bundled Inter WOFF2 fonts without any CDN dependency.
 
 ---
 
@@ -91,7 +91,7 @@ Open your browser to: **`http://127.0.0.1:5173`**
 
 | Command | Description |
 | :--- | :--- |
-| `npm run dev` | Runs both `@stateghost/server` (port 3001) and `@stateghost/web` (port 5173 with proxy). |
+| `npm run dev` | Runs both `@tracelens/server` (port 3001) and `@tracelens/web` (port 5173 with proxy). |
 | `npm run build` | Compiles the React frontend into `apps/web/dist` and bundles the backend into `apps/server/dist`. |
 | `npm run typecheck` | Typechecks `packages/shared`, `apps/server`, and `apps/web` with strict TypeScript. |
 | `npm test` | Runs 30 fast, reliable Vitest unit and integration tests across parsers, store, and engine. |
@@ -103,7 +103,7 @@ Open your browser to: **`http://127.0.0.1:5173`**
 
 ## 5. Demo Lab: Reproducible Bug Scenarios
 
-Navigate to the **Demo Lab** tab in StateGhost (`/#demo` or top navigation):
+Navigate to the **Demo Lab** tab in TraceLens (`/#demo` or top navigation):
 
 1. **Bug A: Cross-Tab Cart Synchronization**
    - Click **"Open Tab A in New Window"** and **"Open Tab B in New Window"**.
@@ -125,7 +125,7 @@ Navigate to the **Demo Lab** tab in StateGhost (`/#demo` or top navigation):
 ## 6. Honest Demo Behavior & Recorded Samples
 
 - **Live Analysis**: Uses uploaded evidence and actual local Gemma 4 model inference.
-- **Sample Investigation**: Accessible via **"Load Sample Investigation"** on the dashboard. Visibly labeled with **`Sample investigation — recorded example`**. StateGhost **never** presents a pre-recorded diagnosis as live model output, nor does it silently fall back from live inference to recorded answers.
+- **Sample Investigation**: Accessible via **"Load Sample Investigation"** on the dashboard. Visibly labeled with **`Sample investigation — recorded example`**. TraceLens **never** presents a pre-recorded diagnosis as live model output, nor does it silently fall back from live inference to recorded answers.
 
 ---
 
@@ -133,6 +133,7 @@ Navigate to the **Demo Lab** tab in StateGhost (`/#demo` or top navigation):
 
 - [Architecture & Topology](file:///Users/sakshamarc/Desktop/Trace-lens-2/docs/architecture.md)
 - [3-Minute Demo Script](file:///Users/sakshamarc/Desktop/Trace-lens-2/docs/demo-script.md)
+- [Evaluation & Verification Report](file:///Users/sakshamarc/Desktop/Trace-lens-2/docs/evaluation-report.md)
 - [Feature-to-Evidence Judging Matrix](file:///Users/sakshamarc/Desktop/Trace-lens-2/docs/judging-matrix.md)
 - [Measured Limitations & Constraints](file:///Users/sakshamarc/Desktop/Trace-lens-2/docs/limitations.md)
 - [Role of Local Gemma 4](file:///Users/sakshamarc/Desktop/Trace-lens-2/docs/gemma-role.md)
