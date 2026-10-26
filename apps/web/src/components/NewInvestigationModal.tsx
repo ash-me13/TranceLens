@@ -33,21 +33,24 @@ export function NewInvestigationModal({ initialMode = 'state', onClose, onCreate
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-fade-in">
-      <div className="bg-slate-900 border border-slate-700 rounded-xl shadow-2xl max-w-lg w-full overflow-hidden">
-        <div className="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-950/60">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-fade-in">
+      <div className="bg-[#0e1626] border border-white/[0.1] rounded-2xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_25px_50px_-12px_rgba(0,0,0,0.7)] max-w-lg w-full overflow-hidden">
+        <div className="p-5 border-b border-white/[0.08] flex items-center justify-between bg-white/[0.02]">
           <h3 className="text-base font-bold text-white flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-teal-400" />
             <span>New Investigation</span>
           </h3>
-          <button onClick={onClose} className="p-1 rounded text-slate-400 hover:text-white transition">
+          <button
+            onClick={onClose}
+            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/[0.05] transition-colors"
+          >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-5 space-y-4">
+        <form onSubmit={handleSubmit} className="p-6 space-y-5">
           {error && (
-            <div className="p-3 bg-rose-950/80 border border-rose-500/40 rounded-lg text-rose-300 text-xs">
+            <div className="p-3 bg-rose-950/40 border border-rose-500/40 rounded-xl text-rose-300 text-xs">
               {error}
             </div>
           )}
@@ -61,22 +64,22 @@ export function NewInvestigationModal({ initialMode = 'state', onClose, onCreate
               value={title}
               onChange={e => setTitle(e.target.value)}
               placeholder="e.g. Cart total differs across two tabs"
-              className="w-full px-3.5 py-2 bg-slate-950 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="w-full px-3.5 py-2.5 bg-[#090d16] border border-white/[0.1] rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500/50 focus:border-teal-500/80 transition-all"
               autoFocus
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+            <label className="block text-xs font-semibold text-slate-300 mb-2">
               Investigation Mode
             </label>
             <div className="grid grid-cols-1 gap-2.5">
               <label
                 onClick={() => setMode('state')}
-                className={`p-3 rounded-lg border cursor-pointer flex items-start gap-3 transition ${
+                className={`p-3.5 rounded-xl border cursor-pointer flex items-start gap-3 transition-all ${
                   mode === 'state'
-                    ? 'bg-slate-800 border-teal-500 ring-1 ring-teal-500/40'
-                    : 'bg-slate-950/60 border-slate-800 hover:border-slate-700'
+                    ? 'bg-[#151f33] border-teal-500 ring-1 ring-teal-500/40 shadow-sm'
+                    : 'bg-[#090d16]/70 border-white/[0.07] hover:border-white/[0.15]'
                 }`}
               >
                 <input type="radio" name="mode" checked={mode === 'state'} onChange={() => setMode('state')} className="mt-1" />
@@ -93,16 +96,16 @@ export function NewInvestigationModal({ initialMode = 'state', onClose, onCreate
 
               <label
                 onClick={() => setMode('request')}
-                className={`p-3 rounded-lg border cursor-pointer flex items-start gap-3 transition ${
+                className={`p-3.5 rounded-xl border cursor-pointer flex items-start gap-3 transition-all ${
                   mode === 'request'
-                    ? 'bg-slate-800 border-teal-500 ring-1 ring-teal-500/40'
-                    : 'bg-slate-950/60 border-slate-800 hover:border-slate-700'
+                    ? 'bg-[#151f33] border-amber-500 ring-1 ring-amber-500/40 shadow-sm'
+                    : 'bg-[#090d16]/70 border-white/[0.07] hover:border-white/[0.15]'
                 }`}
               >
                 <input type="radio" name="mode" checked={mode === 'request'} onChange={() => setMode('request')} className="mt-1" />
                 <div>
                   <div className="flex items-center gap-2">
-                    <Layers className="w-4 h-4 text-teal-400" />
+                    <Layers className="w-4 h-4 text-amber-400" />
                     <span className="text-xs font-bold text-white">Request Detective</span>
                   </div>
                   <p className="text-[11px] text-slate-400 mt-0.5">
@@ -113,16 +116,16 @@ export function NewInvestigationModal({ initialMode = 'state', onClose, onCreate
 
               <label
                 onClick={() => setMode('setup')}
-                className={`p-3 rounded-lg border cursor-pointer flex items-start gap-3 transition ${
+                className={`p-3.5 rounded-xl border cursor-pointer flex items-start gap-3 transition-all ${
                   mode === 'setup'
-                    ? 'bg-slate-800 border-teal-500 ring-1 ring-teal-500/40'
-                    : 'bg-slate-950/60 border-slate-800 hover:border-slate-700'
+                    ? 'bg-[#151f33] border-indigo-500 ring-1 ring-indigo-500/40 shadow-sm'
+                    : 'bg-[#090d16]/70 border-white/[0.07] hover:border-white/[0.15]'
                 }`}
               >
                 <input type="radio" name="mode" checked={mode === 'setup'} onChange={() => setMode('setup')} className="mt-1" />
                 <div>
                   <div className="flex items-center gap-2">
-                    <Laptop className="w-4 h-4 text-teal-400" />
+                    <Laptop className="w-4 h-4 text-indigo-400" />
                     <span className="text-xs font-bold text-white">Setup Forensics</span>
                   </div>
                   <p className="text-[11px] text-slate-400 mt-0.5">
@@ -133,18 +136,18 @@ export function NewInvestigationModal({ initialMode = 'state', onClose, onCreate
             </div>
           </div>
 
-          <div className="pt-3 border-t border-slate-800 flex justify-end gap-2">
+          <div className="pt-3 border-t border-white/[0.08] flex justify-end gap-2.5">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white transition"
+              className="btn-secondary-human px-4 py-2 text-xs font-semibold rounded-xl"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="px-4 py-2 bg-teal-600 hover:bg-teal-500 text-white text-xs font-bold rounded-lg transition disabled:opacity-50"
+              className="btn-primary-human px-4 py-2 text-xs font-bold rounded-xl disabled:opacity-50"
             >
               {loading ? 'Creating...' : 'Create Investigation'}
             </button>

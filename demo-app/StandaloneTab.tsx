@@ -1,34 +1,36 @@
 import React, { useState } from 'react';
 import { CATALOG, formatMoney } from './types';
 import { useDemoCart, getStoredCart } from './cart-store';
-import { RotateCcw, ExternalLink } from 'lucide-react';
+import { RotateCcw } from 'lucide-react';
 
 export function StandaloneTab({ tab }: { tab: 'Tab A' | 'Tab B' }) {
   const [isFixed, setIsFixed] = useState(false);
   const cart = useDemoCart(tab, isFixed);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 p-6 flex flex-col justify-between font-sans">
+    <div className="min-h-screen bg-[#090d16] text-slate-100 p-6 flex flex-col justify-between font-sans selection:bg-teal-500/25 selection:text-teal-200">
       <div className="space-y-4">
-        <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
           <div>
-            <h1 className="text-xl font-black text-white">{tab}</h1>
+            <h1 className="text-xl font-black text-white tracking-tight">{tab}</h1>
             <p className="text-xs text-slate-400">TraceLens Real Browser Window Test</p>
           </div>
           <div className="text-right">
-            <div className="text-2xl font-black text-teal-400 font-mono">
+            <div className="text-2xl font-black text-teal-400 font-mono tracking-tight">
               {formatMoney(cart.totalMinor)}
             </div>
             <div className="text-[10px] text-slate-400">Total in Minor Units: {cart.totalMinor}</div>
           </div>
         </div>
 
-        <div className="flex items-center justify-between bg-slate-900 p-2.5 rounded-lg border border-slate-800 text-xs">
-          <span>Mode:</span>
+        <div className="flex items-center justify-between bg-[#0e1626] p-3 rounded-xl border border-white/[0.08] text-xs shadow-sm">
+          <span className="font-medium text-slate-300">Mode:</span>
           <button
             onClick={() => setIsFixed(!isFixed)}
-            className={`px-2.5 py-1 rounded font-bold transition ${
-              isFixed ? 'bg-teal-600 text-white' : 'bg-rose-600 text-white'
+            className={`px-3 py-1 rounded-lg font-bold transition-all shadow-sm active:scale-95 ${
+              isFixed
+                ? 'bg-emerald-600 hover:bg-emerald-500 text-white'
+                : 'bg-rose-600 hover:bg-rose-500 text-white'
             }`}
           >
             {isFixed ? 'Fixed (Listening)' : 'Buggy (Stale Memory)'}
@@ -37,9 +39,9 @@ export function StandaloneTab({ tab }: { tab: 'Tab A' | 'Tab B' }) {
 
         <div className="space-y-2">
           <div className="text-xs font-semibold text-slate-300">In-Memory Cart Items ({cart.items.length}):</div>
-          <div className="space-y-1.5 max-h-48 overflow-y-auto">
+          <div className="space-y-1.5 max-h-48 overflow-y-auto pr-1">
             {cart.items.map((item, idx) => (
-              <div key={idx} className="flex justify-between items-center p-2 bg-slate-900 rounded border border-slate-800 text-xs">
+              <div key={idx} className="flex justify-between items-center p-2.5 bg-[#0e1626] rounded-xl border border-white/[0.06] text-xs">
                 <span>{item.name}</span>
                 <span className="font-mono text-slate-400">{formatMoney(item.priceMinor)}</span>
               </div>
@@ -47,14 +49,14 @@ export function StandaloneTab({ tab }: { tab: 'Tab A' | 'Tab B' }) {
           </div>
         </div>
 
-        <div className="pt-2 border-t border-slate-800 space-y-2">
+        <div className="pt-2 border-t border-white/[0.08] space-y-2">
           <div className="text-xs font-semibold text-slate-300">Add Item:</div>
           <div className="grid grid-cols-2 gap-2">
             {CATALOG.slice(1).map(cat => (
               <button
                 key={cat.id}
                 onClick={() => cart.addItem(cat)}
-                className="px-2.5 py-1.5 text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded transition text-left truncate"
+                className="px-3 py-2 text-xs bg-[#151f33] hover:bg-[#1b2740] text-slate-200 border border-white/[0.08] rounded-xl transition-all text-left truncate active:scale-95"
               >
                 + {cat.name}
               </button>
@@ -63,14 +65,14 @@ export function StandaloneTab({ tab }: { tab: 'Tab A' | 'Tab B' }) {
         </div>
       </div>
 
-      <div className="pt-4 border-t border-slate-800 space-y-2">
+      <div className="pt-4 border-t border-white/[0.08] space-y-2">
         <div className="flex items-center justify-between">
           <span className="text-xs text-slate-400">
             Storage: {formatMoney(getStoredCart().reduce((s, i) => s + i.priceMinor, 0))}
           </span>
           <button
             onClick={cart.refreshTab}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-teal-600 hover:bg-teal-500 text-white rounded font-bold"
+            className="btn-primary-human flex items-center gap-1.5 px-3.5 py-1.5 text-xs rounded-xl active:scale-95"
           >
             <RotateCcw className="w-3.5 h-3.5" /> Refresh Tab
           </button>

@@ -78,7 +78,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-teal-500/30 selection:text-teal-200">
+    <div className="min-h-screen bg-transparent text-slate-100 flex flex-col font-sans selection:bg-teal-500/25 selection:text-teal-100 relative">
       <Header
         currentView={currentView}
         onNavigate={navigate}

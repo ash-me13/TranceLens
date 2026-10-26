@@ -265,27 +265,27 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
   return (
     <div className="space-y-4">
       {/* Top Header Bar */}
-      <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-4 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-[#0e1626]/85 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-4 sm:p-5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06),0_10px_25px_-5px_rgba(0,0,0,0.4)] flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <button
             onClick={onBack}
-            className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition"
+            className="p-2 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] text-slate-300 hover:text-white transition-all shadow-sm"
             title="Back to Dashboard"
           >
             <ArrowLeft className="w-4 h-4" />
           </button>
           <div>
             <div className="flex items-center gap-2">
-              <span className={`px-2 py-0.5 text-[11px] font-bold uppercase rounded ${
-                inv.mode === 'state' ? 'bg-teal-950 text-teal-300 border border-teal-800' :
-                inv.mode === 'request' ? 'bg-amber-950 text-amber-300 border border-amber-800' :
-                'bg-blue-950 text-blue-300 border border-blue-800'
+              <span className={`px-2.5 py-0.5 text-[11px] font-bold uppercase rounded-full ${
+                inv.mode === 'state' ? 'bg-teal-950/70 text-teal-300 border border-teal-500/30' :
+                inv.mode === 'request' ? 'bg-amber-950/70 text-amber-300 border border-amber-500/30' :
+                'bg-indigo-950/70 text-indigo-300 border border-indigo-500/30'
               }`}>
                 {inv.mode}
               </span>
               <h1 className="text-lg font-bold text-white tracking-tight">{inv.title}</h1>
               {inv.sample && (
-                <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30">
                   Sample investigation — recorded example
                 </span>
               )}
@@ -299,15 +299,15 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
         {/* Workspace Toolbar */}
         <div className="flex items-center gap-2">
           {inv.analyses.length > 1 && (
-            <div className="flex items-center gap-1.5 bg-slate-950 px-2 py-1 rounded-lg border border-slate-800 text-xs">
+            <div className="flex items-center gap-1.5 bg-[#090d16] px-2.5 py-1.5 rounded-xl border border-white/[0.08] text-xs shadow-sm">
               <span className="text-slate-400 text-[11px]">Revision:</span>
               <select
                 value={selectedRevision}
                 onChange={e => setSelectedRevision(Number(e.target.value))}
-                className="bg-transparent text-white font-bold focus:outline-none"
+                className="bg-transparent text-white font-bold focus:outline-none cursor-pointer"
               >
                 {inv.analyses.map(a => (
-                  <option key={a.revision} value={a.revision}>Rev {a.revision}</option>
+                  <option key={a.revision} value={a.revision} className="bg-slate-900 text-white">Rev {a.revision}</option>
                 ))}
               </select>
             </div>
@@ -316,40 +316,40 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
           <a
             href={`/api/investigations/${inv.id}/export?format=markdown`}
             download={`tracelens-${inv.id}.md`}
-            className="flex items-center gap-1 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-lg border border-slate-700 transition"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-[#151f33] hover:bg-[#1a2740] text-slate-200 text-xs font-semibold rounded-xl border border-white/[0.08] hover:border-white/[0.15] transition-all shadow-sm"
             title="Download investigation Markdown report"
           >
-            <Download className="w-3.5 h-3.5" /> Export MD
+            <Download className="w-3.5 h-3.5 text-teal-400" /> Export MD
           </a>
 
           <a
             href={`/api/investigations/${inv.id}/export`}
             download={`tracelens-${inv.id}.json`}
-            className="flex items-center gap-1 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-lg border border-slate-700 transition"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-[#151f33] hover:bg-[#1a2740] text-slate-200 text-xs font-semibold rounded-xl border border-white/[0.08] hover:border-white/[0.15] transition-all shadow-sm"
             title="Download structured JSON"
           >
-            <Download className="w-3.5 h-3.5" /> JSON
+            <Download className="w-3.5 h-3.5 text-slate-400" /> JSON
           </a>
         </div>
       </div>
 
       {/* Mobile Tabs */}
-      <div className="md:hidden flex rounded-lg bg-slate-900 p-1 border border-slate-800 text-xs font-semibold">
+      <div className="md:hidden flex rounded-xl bg-[#0e1626]/80 p-1 border border-white/[0.08] text-xs font-semibold backdrop-blur-md">
         <button
           onClick={() => setMobileTab('evidence')}
-          className={`flex-1 py-1.5 rounded-md ${mobileTab === 'evidence' ? 'bg-slate-800 text-white' : 'text-slate-400'}`}
+          className={`flex-1 py-1.5 rounded-lg transition-all ${mobileTab === 'evidence' ? 'bg-[#151f33] text-white shadow-sm' : 'text-slate-400'}`}
         >
           Evidence ({inv.evidence.length})
         </button>
         <button
           onClick={() => setMobileTab('analysis')}
-          className={`flex-1 py-1.5 rounded-md ${mobileTab === 'analysis' ? 'bg-slate-800 text-white' : 'text-slate-400'}`}
+          className={`flex-1 py-1.5 rounded-lg transition-all ${mobileTab === 'analysis' ? 'bg-[#151f33] text-white shadow-sm' : 'text-slate-400'}`}
         >
           Investigation
         </button>
         <button
           onClick={() => setMobileTab('hypotheses')}
-          className={`flex-1 py-1.5 rounded-md ${mobileTab === 'hypotheses' ? 'bg-slate-800 text-white' : 'text-slate-400'}`}
+          className={`flex-1 py-1.5 rounded-lg transition-all ${mobileTab === 'hypotheses' ? 'bg-[#151f33] text-white shadow-sm' : 'text-slate-400'}`}
         >
           Hypotheses
         </button>
@@ -361,13 +361,13 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
         {/* COLUMN 1: EVIDENCE LIBRARY (3 COLS)                     */}
         {/* ======================================================== */}
         <div className={`md:col-span-3 space-y-4 ${mobileTab !== 'evidence' ? 'hidden md:block' : ''}`}>
-          <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-4 shadow-xl space-y-4">
+          <div className="bg-[#0e1626]/80 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-4 sm:p-5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06),0_10px_25px_-5px_rgba(0,0,0,0.4)] space-y-4">
             <div className="flex items-center justify-between">
               <h2 className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
                 <FileText className="w-4 h-4 text-teal-400" />
                 <span>Evidence Library</span>
               </h2>
-              <span className="text-[11px] text-slate-500">{inv.evidence.length} / 12 items</span>
+              <span className="text-[11px] text-slate-400">{inv.evidence.length} / 12 items</span>
             </div>
 
             {/* Upload & Paste Buttons */}
@@ -375,7 +375,7 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
               <div className="grid grid-cols-2 gap-2">
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  className="flex items-center justify-center gap-1.5 px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg border border-slate-700 transition"
+                  className="btn-secondary-human flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-xl active:scale-95"
                 >
                   <Upload className="w-3.5 h-3.5 text-teal-400" /> Upload File
                 </button>
@@ -389,7 +389,7 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
 
                 <button
                   onClick={() => setShowPasteModal(true)}
-                  className="flex items-center justify-center gap-1.5 px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg border border-slate-700 transition"
+                  className="btn-secondary-human flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-xl active:scale-95"
                 >
                   <Plus className="w-3.5 h-3.5 text-teal-400" /> Paste Code/Log
                 </button>
@@ -397,23 +397,23 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
             )}
 
             {/* Secret Redaction Notice */}
-            <div className="p-2.5 bg-slate-950/70 border border-slate-800/80 rounded-lg text-[11px] text-slate-400 flex items-start gap-2">
+            <div className="p-3 bg-[#090d16]/70 border border-white/[0.06] rounded-xl text-[11px] text-slate-400 flex items-start gap-2.5">
               <ShieldCheck className="w-4 h-4 text-teal-400 flex-shrink-0 mt-0.5" />
               <span>Authorization headers, cookies, API keys, and environment values are redacted automatically.</span>
             </div>
 
             {/* Ingestion Report Accordion */}
             {inv.evidence.length > 0 && (
-              <div className="border border-slate-800 rounded-lg overflow-hidden text-xs">
+              <div className="border border-white/[0.08] rounded-xl overflow-hidden text-xs">
                 <button
                   onClick={() => setShowReport(!showReport)}
-                  className="w-full p-2.5 bg-slate-950/60 hover:bg-slate-950 flex items-center justify-between text-slate-300 font-medium"
+                  className="w-full p-2.5 bg-[#090d16]/60 hover:bg-[#090d16] flex items-center justify-between text-slate-300 font-medium transition-colors"
                 >
                   <span>Ingestion Report</span>
-                  {showReport ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronRight className="w-3.5 h-3.5" />}
+                  {showReport ? <ChevronDown className="w-3.5 h-3.5 text-slate-400" /> : <ChevronRight className="w-3.5 h-3.5 text-slate-400" />}
                 </button>
                 {showReport && (
-                  <div className="p-3 bg-slate-950 space-y-1.5 text-[11px] text-slate-400 border-t border-slate-800">
+                  <div className="p-3 bg-[#090d16] space-y-1.5 text-[11px] text-slate-400 border-t border-white/[0.06]">
                     <div>Accepted files: {inv.evidence.length}</div>
                     <div>Parsed observations: {inv.evidence.reduce((s, e) => s + e.observations.length, 0)}</div>
                     <div>HAR network events: {inv.evidence.reduce((s, e) => s + e.entries.length, 0)}</div>
@@ -426,7 +426,7 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
             {/* Evidence List */}
             <div className="space-y-2">
               {inv.evidence.length === 0 ? (
-                <div className="p-6 text-center text-slate-500 text-xs border border-dashed border-slate-800 rounded-lg">
+                <div className="p-6 text-center text-slate-400 text-xs border border-dashed border-white/[0.1] rounded-xl">
                   No evidence uploaded yet. Add a screenshot, code, or logs.
                 </div>
               ) : (
@@ -437,7 +437,7 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
                       setActiveCitationRef(null);
                       setInspectEvidence(item);
                     }}
-                    className="p-2.5 bg-slate-950/80 hover:bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-lg cursor-pointer transition space-y-1.5 group"
+                    className="p-3 bg-[#090d16]/75 hover:bg-[#151f33]/85 border border-white/[0.06] hover:border-teal-500/30 rounded-xl cursor-pointer transition-all space-y-1.5 group shadow-sm"
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2 truncate">
@@ -445,7 +445,7 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
                         {item.kind === 'har' && <Network className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />}
                         {item.kind === 'log' && <Terminal className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />}
                         {item.kind === 'source' && <FileText className="w-3.5 h-3.5 text-blue-400 flex-shrink-0" />}
-                        <span className="text-xs font-semibold text-slate-200 truncate group-hover:text-teal-300">
+                        <span className="text-xs font-semibold text-slate-200 truncate group-hover:text-teal-300 transition-colors">
                           {item.displayName}
                         </span>
                       </div>
@@ -455,23 +455,23 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
                             e.stopPropagation();
                             handleDeleteEvidence(item.id);
                           }}
-                          className="text-slate-600 hover:text-rose-400 p-1 rounded"
+                          className="text-slate-500 hover:text-rose-400 p-1 rounded transition-colors"
                           title="Delete evidence"
                         >
-                          <Trash2 className="w-3 h-3" />
+                          <Trash2 className="w-3.5 h-3.5" />
                         </button>
                       )}
                     </div>
 
-                    <div className="flex items-center justify-between text-[10px] text-slate-500">
-                      <span className="px-1.5 py-0.2 rounded bg-slate-900 text-slate-400 border border-slate-800">
+                    <div className="flex items-center justify-between text-[10px] text-slate-400">
+                      <span className="px-2 py-0.5 rounded-full bg-white/[0.04] text-slate-300 border border-white/[0.06]">
                         {item.sourceLabel}
                       </span>
                       <span>{item.bytes} B</span>
                     </div>
 
                     {item.observations.length > 0 && (
-                      <div className="text-[10px] text-teal-400/90 font-mono">
+                      <div className="text-[10px] text-teal-300/90 font-mono">
                         {item.observations.length} observations ({item.observations.filter(o => o.verification === 'confirmed').length} verified)
                       </div>
                     )}
@@ -487,13 +487,13 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
         {/* ======================================================== */}
         <div className={`md:col-span-6 space-y-4 ${mobileTab !== 'analysis' ? 'hidden md:block' : ''}`}>
           {/* Analysis Runner Bar */}
-          <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-4 shadow-xl space-y-3">
+          <div className="bg-[#0e1626]/85 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-4 sm:p-5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06),0_10px_25px_-5px_rgba(0,0,0,0.4)] space-y-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <button
                   onClick={handleAnalyze}
                   disabled={!!activeJob && activeJob.status === 'running'}
-                  className="flex items-center gap-2 px-4 py-2 bg-teal-500 hover:bg-teal-400 text-slate-950 text-xs font-bold rounded-lg transition shadow-md shadow-teal-500/20 disabled:opacity-50"
+                  className="btn-primary-human flex items-center gap-2 px-5 py-2.5 text-xs font-bold rounded-xl active:scale-95 disabled:opacity-50"
                 >
                   <Play className="w-3.5 h-3.5 fill-current" />
                   <span>{currentAnalysis ? 'Re-Analyze with Gemma 4' : 'Analyze with Local Gemma 4'}</span>
@@ -502,7 +502,7 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
                 {activeJob && activeJob.status === 'running' && (
                   <button
                     onClick={handleCancelJob}
-                    className="flex items-center gap-1.5 px-3 py-2 bg-rose-950/80 hover:bg-rose-900 text-rose-300 text-xs font-bold rounded-lg border border-rose-800 transition"
+                    className="flex items-center gap-1.5 px-3 py-2 bg-rose-950/80 hover:bg-rose-900 text-rose-300 text-xs font-bold rounded-xl border border-rose-500/40 transition active:scale-95"
                   >
                     <X className="w-3.5 h-3.5" /> Cancel Analysis
                   </button>
@@ -522,11 +522,11 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
 
             {/* Active Job Progress Stages */}
             {activeJob && (
-              <div className={`p-3 rounded-lg border text-xs space-y-1.5 ${
-                activeJob.status === 'running' ? 'bg-teal-950/40 border-teal-500/40 text-teal-200' :
-                activeJob.status === 'failed' ? 'bg-rose-950/40 border-rose-500/40 text-rose-200' :
-                activeJob.status === 'cancelled' ? 'bg-slate-800 border-slate-700 text-slate-400' :
-                'bg-slate-900 border-slate-800 text-slate-300'
+              <div className={`p-3.5 rounded-xl border text-xs space-y-1.5 ${
+                activeJob.status === 'running' ? 'bg-teal-950/30 border-teal-500/30 text-teal-200' :
+                activeJob.status === 'failed' ? 'bg-rose-950/30 border-rose-500/30 text-rose-200' :
+                activeJob.status === 'cancelled' ? 'bg-[#151f33] border-white/[0.08] text-slate-400' :
+                'bg-[#090d16] border-white/[0.08] text-slate-300'
               }`}>
                 <div className="flex items-center justify-between font-semibold">
                   <span className="flex items-center gap-2">
@@ -535,7 +535,7 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
                     )}
                     <span>Stage: {activeJob.stage}</span>
                   </span>
-                  <span className="uppercase text-[10px] tracking-wider">{activeJob.status}</span>
+                  <span className="uppercase text-[10px] tracking-wider px-2 py-0.5 rounded bg-white/[0.05]">{activeJob.status}</span>
                 </div>
                 {activeJob.error && (
                   <div className="text-rose-300 text-[11px] font-mono">{activeJob.error}</div>
@@ -546,7 +546,7 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
 
           {/* MODE-SPECIFIC CENTER VIEW */}
           {inv.mode === 'state' && (
-            <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-5 shadow-xl space-y-5">
+            <div className="bg-[#0e1626]/80 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-5 sm:p-6 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06),0_10px_25px_-5px_rgba(0,0,0,0.4)] space-y-5">
               <div>
                 <h3 className="text-sm font-bold text-white flex items-center gap-2">
                   <Eye className="w-4 h-4 text-teal-400" />
@@ -567,7 +567,7 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
 
               {/* Plain-Language Contradiction Summary */}
               {currentAnalysis?.summary && (
-                <div className="p-4 bg-slate-950 rounded-xl border border-slate-800 space-y-2">
+                <div className="p-4 bg-[#090d16]/80 rounded-xl border border-white/[0.07] space-y-2">
                   <div className="text-xs font-bold text-teal-300 uppercase tracking-wider">
                     Evidence-Grounded Contradiction Summary
                   </div>
@@ -584,7 +584,7 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
                           <button
                             key={idx}
                             onClick={() => handleCitationClick(ref)}
-                            className="text-[10px] font-mono text-teal-400 bg-teal-950 px-2 py-0.5 rounded border border-teal-800 hover:bg-teal-900 transition"
+                            className="text-[10px] font-mono text-teal-300 bg-teal-950/70 px-2 py-0.5 rounded-full border border-teal-500/30 hover:bg-teal-900/80 transition-colors"
                           >
                             Cite: {ref.locator}
                           </button>
@@ -598,10 +598,10 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
           )}
 
           {inv.mode === 'request' && (
-            <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-5 shadow-xl space-y-5">
+            <div className="bg-[#0e1626]/80 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-5 sm:p-6 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06),0_10px_25px_-5px_rgba(0,0,0,0.4)] space-y-5">
               <div>
                 <h3 className="text-sm font-bold text-white flex items-center gap-2">
-                  <Layers className="w-4 h-4 text-teal-400" />
+                  <Layers className="w-4 h-4 text-amber-400" />
                   <span>Interactive Request Journey Timeline</span>
                 </h3>
                 <p className="text-xs text-slate-400 mt-1">
@@ -611,28 +611,28 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
               </div>
 
               {/* Timeline Events List */}
-              <div className="space-y-3 relative before:absolute before:inset-0 before:left-3.5 before:w-0.5 before:bg-slate-800">
+              <div className="space-y-3 relative before:absolute before:inset-0 before:left-3.5 before:w-0.5 before:bg-white/[0.08]">
                 {(currentAnalysis?.modeSpecificResults?.timeline || []).length === 0 ? (
-                  <div className="p-8 text-center text-xs text-slate-500 bg-slate-950 rounded-xl border border-slate-800">
+                  <div className="p-8 text-center text-xs text-slate-400 bg-[#090d16]/60 rounded-xl border border-white/[0.07]">
                     No timeline events yet. Upload a HAR file or server log and run analysis.
                   </div>
                 ) : (
                   currentAnalysis?.modeSpecificResults?.timeline.map((evt, i) => (
                     <div key={evt.id || i} className="relative flex items-start gap-3 pl-8">
-                      <span className="absolute left-2.5 top-1.5 w-2.5 h-2.5 rounded-full bg-teal-400 ring-4 ring-slate-900"></span>
-                      <div className="flex-1 p-3.5 bg-slate-950 border border-slate-800 rounded-xl space-y-1.5">
+                      <span className="absolute left-2.5 top-1.5 w-2.5 h-2.5 rounded-full bg-teal-400 ring-4 ring-[#0e1626]"></span>
+                      <div className="flex-1 p-4 bg-[#090d16]/80 border border-white/[0.07] rounded-xl space-y-1.5 shadow-sm">
                         <div className="flex items-center justify-between text-xs">
                           <span className="font-bold text-white">{evt.label}</span>
-                          <span className={`text-[10px] font-semibold px-2 py-0.5 rounded ${
+                          <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
                             evt.association === 'explicit ID'
-                              ? 'bg-teal-950 text-teal-300 border border-teal-800'
-                              : 'bg-amber-950 text-amber-300 border border-amber-800'
+                              ? 'bg-teal-950/70 text-teal-300 border border-teal-500/30'
+                              : 'bg-amber-950/70 text-amber-300 border border-amber-500/30'
                           }`}>
                             {evt.association}
                           </span>
                         </div>
                         <div className="text-xs text-slate-300 font-mono leading-relaxed">{evt.detail}</div>
-                        <div className="flex items-center justify-between pt-1 text-[11px] text-slate-500">
+                        <div className="flex items-center justify-between pt-1 text-[11px] text-slate-400">
                           <span>{evt.timestamp ? `Time: ${evt.timestamp}` : 'Event time unrecorded'}</span>
                           {evt.evidenceRefs.map((ref, idx) => (
                             <button
@@ -653,10 +653,10 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
           )}
 
           {inv.mode === 'setup' && (
-            <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-5 shadow-xl space-y-5">
+            <div className="bg-[#0e1626]/80 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-5 sm:p-6 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06),0_10px_25px_-5px_rgba(0,0,0,0.4)] space-y-5">
               <div>
                 <h3 className="text-sm font-bold text-white flex items-center gap-2">
-                  <Terminal className="w-4 h-4 text-teal-400" />
+                  <Terminal className="w-4 h-4 text-indigo-400" />
                   <span>Deterministic Environment Differences</span>
                 </h3>
                 <p className="text-xs text-slate-400 mt-1">
@@ -667,37 +667,37 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
               {/* Differences Table */}
               <div className="space-y-3">
                 {(currentAnalysis?.modeSpecificResults?.setupDifferences || []).length === 0 ? (
-                  <div className="p-8 text-center text-xs text-slate-500 bg-slate-950 rounded-xl border border-slate-800">
+                  <div className="p-8 text-center text-xs text-slate-400 bg-[#090d16]/60 rounded-xl border border-white/[0.07]">
                     No environment differences computed yet. Upload manifests and run analysis.
                   </div>
                 ) : (
                   currentAnalysis?.modeSpecificResults?.setupDifferences.map((diff, i) => (
                     <div
                       key={i}
-                      className={`p-4 rounded-xl border text-xs space-y-2 ${
-                        diff.severity === 'error' ? 'bg-rose-950/30 border-rose-500/40' :
-                        diff.severity === 'warning' ? 'bg-amber-950/30 border-amber-500/40' :
-                        'bg-slate-950 border-slate-800'
+                      className={`p-4 rounded-xl border text-xs space-y-2.5 ${
+                        diff.severity === 'error' ? 'bg-rose-950/25 border-rose-500/30' :
+                        diff.severity === 'warning' ? 'bg-amber-950/25 border-amber-500/30' :
+                        'bg-[#090d16]/80 border-white/[0.08]'
                       }`}
                     >
                       <div className="flex items-center justify-between">
                         <span className="font-bold text-white text-sm">{diff.check}</span>
-                        <span className={`text-[10px] font-bold uppercase px-2 py-0.5 rounded ${
-                          diff.severity === 'error' ? 'bg-rose-500/20 text-rose-300' :
-                          diff.severity === 'warning' ? 'bg-amber-500/20 text-amber-300' :
-                          'bg-teal-500/20 text-teal-300'
+                        <span className={`text-[10px] font-bold uppercase px-2.5 py-0.5 rounded-full ${
+                          diff.severity === 'error' ? 'bg-rose-500/20 text-rose-300 border border-rose-500/30' :
+                          diff.severity === 'warning' ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30' :
+                          'bg-teal-500/20 text-teal-300 border border-teal-500/30'
                         }`}>
                           {diff.severity}
                         </span>
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-                        <div className="p-2.5 bg-slate-900/80 rounded border border-slate-800">
-                          <div className="text-[10px] font-semibold text-slate-400 uppercase">Working Environment</div>
+                        <div className="p-3 bg-[#090d16]/90 rounded-xl border border-white/[0.06]">
+                          <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Working Environment</div>
                           <div className="text-slate-200 mt-1 font-mono text-[11px]">{diff.working}</div>
                         </div>
-                        <div className="p-2.5 bg-slate-900/80 rounded border border-slate-800">
-                          <div className="text-[10px] font-semibold text-slate-400 uppercase">Broken Environment</div>
+                        <div className="p-3 bg-[#090d16]/90 rounded-xl border border-white/[0.06]">
+                          <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Broken Environment</div>
                           <div className="text-rose-300 mt-1 font-mono text-[11px]">{diff.broken}</div>
                         </div>
                       </div>
@@ -727,7 +727,7 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
         <div className={`md:col-span-3 space-y-4 ${mobileTab !== 'hypotheses' ? 'hidden md:block' : ''}`}>
           {/* Missing Evidence Alert */}
           {currentAnalysis?.missingEvidence && currentAnalysis.missingEvidence.length > 0 && (
-            <div className="bg-amber-950/40 border border-amber-500/40 rounded-xl p-4 text-xs space-y-1.5 shadow-lg">
+            <div className="bg-amber-950/25 border border-amber-500/30 rounded-2xl p-4 text-xs space-y-2 shadow-sm backdrop-blur-md">
               <div className="font-bold text-amber-300 flex items-center gap-1.5">
                 <AlertTriangle className="w-4 h-4 text-amber-400" /> Missing Information
               </div>
@@ -740,19 +740,19 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
           )}
 
           {/* Ranked Plausible Explanations */}
-          <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-4 shadow-xl space-y-4">
+          <div className="bg-[#0e1626]/80 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-4 sm:p-5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06),0_10px_25px_-5px_rgba(0,0,0,0.4)] space-y-4">
             <div className="flex items-center justify-between">
               <h2 className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
                 <Sparkles className="w-4 h-4 text-teal-400" />
                 <span>Competing Hypotheses</span>
               </h2>
-              <span className="text-[11px] text-slate-500">
+              <span className="text-[11px] text-slate-400">
                 {currentAnalysis?.hypotheses.length || 0} active
               </span>
             </div>
 
             {(!currentAnalysis?.hypotheses || currentAnalysis.hypotheses.length === 0) ? (
-              <p className="text-xs text-slate-500 italic p-4 text-center">
+              <p className="text-xs text-slate-400 italic p-4 text-center">
                 Run an initial analysis to generate competing hypotheses.
               </p>
             ) : (
@@ -760,20 +760,20 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
                 {currentAnalysis.hypotheses.map(h => (
                   <div
                     key={h.id}
-                    className="p-3.5 bg-slate-950 border border-slate-800 rounded-xl space-y-2.5 text-xs shadow"
+                    className="p-4 bg-[#090d16]/80 border border-white/[0.07] hover:border-white/[0.15] rounded-xl space-y-2.5 text-xs shadow-sm transition-all"
                   >
                     <div className="flex items-center justify-between">
                       <span className="font-bold text-white text-xs">{h.title}</span>
                       <div className="flex items-center gap-1">
-                        <span className={`text-[10px] font-bold uppercase px-1.5 py-0.5 rounded ${
-                          h.status === 'supported' ? 'bg-teal-500/20 text-teal-300' :
-                          h.status === 'weakened' ? 'bg-amber-500/20 text-amber-300' :
-                          h.status === 'contradicted' ? 'bg-rose-500/20 text-rose-300' :
-                          'bg-slate-800 text-slate-400'
+                        <span className={`text-[10px] font-bold uppercase px-2 py-0.5 rounded-full ${
+                          h.status === 'supported' ? 'bg-teal-500/20 text-teal-300 border border-teal-500/30' :
+                          h.status === 'weakened' ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30' :
+                          h.status === 'contradicted' ? 'bg-rose-500/20 text-rose-300 border border-rose-500/30' :
+                          'bg-white/[0.05] text-slate-400'
                         }`}>
                           {h.status}
                         </span>
-                        <span className="text-[10px] px-1 py-0.5 rounded bg-slate-800 text-slate-400">
+                        <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-white/[0.05] text-slate-400">
                           {h.evidenceStrength}
                         </span>
                       </div>
@@ -782,7 +782,7 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
                     <p className="text-slate-300 text-xs leading-relaxed font-sans">{h.explanation}</p>
 
                     {/* Supporting and Contradicting Citations */}
-                    <div className="space-y-1 text-[11px] pt-1 border-t border-slate-800/80">
+                    <div className="space-y-1 text-[11px] pt-1 border-t border-white/[0.06]">
                       <div className="text-slate-400">
                         <span className="text-teal-400 font-semibold">Supporting:</span>{' '}
                         {h.supportingObservationIds.length ? h.supportingObservationIds.join(', ') : 'None supplied'}
@@ -796,7 +796,7 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
                     </div>
 
                     {/* Distinguishing Test Card */}
-                    <div className="p-2.5 bg-slate-900/90 rounded-lg border border-slate-800 text-[11px] space-y-1.5">
+                    <div className="p-3 bg-white/[0.03] rounded-xl border border-white/[0.06] text-[11px] space-y-2">
                       <div className="font-bold text-teal-300">Distinguishing Test:</div>
                       <div className="text-slate-300">{h.distinguishingTest.action}</div>
 
@@ -806,24 +806,24 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
 
                       <div className="pt-1">
                         {recordingTestHId === h.id ? (
-                          <div className="space-y-2 pt-1 border-t border-slate-800">
+                          <div className="space-y-2 pt-1 border-t border-white/[0.06]">
                             <input
                               type="text"
                               value={testResultText}
                               onChange={e => setTestResultText(e.target.value)}
                               placeholder="Record what happened after test..."
-                              className="w-full px-2 py-1 bg-slate-950 border border-slate-700 rounded text-xs text-white"
+                              className="w-full px-2.5 py-1.5 bg-[#090d16] border border-white/[0.1] rounded-lg text-xs text-white focus:outline-none focus:ring-1 focus:ring-teal-500"
                             />
                             <div className="flex justify-end gap-1.5">
                               <button
                                 onClick={() => setRecordingTestHId(null)}
-                                className="px-2 py-0.5 text-[10px] text-slate-400"
+                                className="px-2 py-0.5 text-[10px] text-slate-400 hover:text-white"
                               >
                                 Cancel
                               </button>
                               <button
                                 onClick={() => handleRecordTestResult(h.id)}
-                                className="px-2 py-0.5 bg-teal-600 hover:bg-teal-500 text-white text-[10px] font-bold rounded"
+                                className="px-2.5 py-0.5 bg-teal-600 hover:bg-teal-500 text-white text-[10px] font-bold rounded-lg transition"
                               >
                                 Save Result
                               </button>
@@ -850,7 +850,7 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
 
           {/* Follow-up Question Card */}
           {currentAnalysis?.nextQuestion && (
-            <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-4 shadow-xl space-y-3">
+            <div className="bg-[#0e1626]/90 border border-amber-500/30 rounded-2xl p-4 sm:p-5 shadow-[0_4px_24px_-4px_rgba(245,158,11,0.15)] space-y-3.5 backdrop-blur-xl">
               <div className="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
                 <HelpCircle className="w-4 h-4" /> One Follow-Up Question
               </div>
@@ -864,14 +864,14 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
               </div>
 
               {/* Selectable Options */}
-              <div className="space-y-1.5 pt-1">
+              <div className="space-y-2 pt-1">
                 {currentAnalysis.nextQuestion.answerOptions.map((opt, i) => (
                   <label
                     key={i}
-                    className={`flex items-center gap-2 p-2 rounded-lg border text-xs cursor-pointer transition ${
+                    className={`flex items-center gap-2.5 p-2.5 rounded-xl border text-xs cursor-pointer transition-all ${
                       selectedAnswer === opt
-                        ? 'bg-slate-800 border-teal-500 text-white ring-1 ring-teal-500/40'
-                        : 'bg-slate-950/60 border-slate-800 text-slate-300 hover:border-slate-700'
+                        ? 'bg-[#151f33] border-teal-500 text-white ring-1 ring-teal-500/40 shadow-sm'
+                        : 'bg-[#090d16]/70 border-white/[0.07] text-slate-300 hover:border-white/[0.15]'
                     }`}
                   >
                     <input
@@ -897,14 +897,14 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
                     setSelectedAnswer('');
                   }}
                   placeholder="Or enter custom answer..."
-                  className="w-full px-3 py-1.5 bg-slate-950 border border-slate-700 rounded-lg text-xs text-white focus:outline-none focus:ring-1 focus:ring-teal-500"
+                  className="w-full px-3 py-2 bg-[#090d16] border border-white/[0.1] rounded-xl text-xs text-white focus:outline-none focus:ring-1 focus:ring-teal-500"
                 />
               )}
 
               <button
                 onClick={handleSubmitAnswer}
                 disabled={submittingAnswer || (!selectedAnswer && !freeTextAnswer.trim())}
-                className="w-full py-2 bg-teal-600 hover:bg-teal-500 text-white text-xs font-bold rounded-lg transition disabled:opacity-50 shadow"
+                className="btn-primary-human w-full py-2.5 text-xs rounded-xl active:scale-95 disabled:opacity-50"
               >
                 {submittingAnswer ? 'Updating Investigation...' : 'Submit Answer & Update'}
               </button>
@@ -913,7 +913,7 @@ export function InvestigationWorkspace({ investigationId, onBack }: Investigatio
 
           {/* Revision Changelog */}
           {currentAnalysis?.changes && (
-            <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-3.5 text-xs space-y-1">
+            <div className="bg-[#0e1626]/60 border border-white/[0.07] rounded-xl p-3.5 text-xs space-y-1">
               <span className="font-bold text-slate-400 text-[11px] uppercase tracking-wider">
                 What Changed in Revision {currentAnalysis.revision}
               </span>

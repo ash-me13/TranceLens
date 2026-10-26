@@ -2,23 +2,117 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom color definitions based on UI requirements:
- * - Deep navy background
- * - Readable neutral surfaces
- * - Teal for observations and successful checks.
- * - Amber for unresolved questions.
- * - Coral for contradictions and errors.
+/* Humanized Design System Tokens
+ * TraceLens: "Find where your app's story breaks."
+ * Visual Philosophy:
+ * - Warm obsidian atmosphere with organic ambient lighting
+ * - Physical tactility with subtle specular top-edge highlights
+ * - Human-centric colors: soothing jade/teal (observed), warm honey amber (inferred/gaps), gentle rose coral (contradictions/errors)
+ * - Highly legible typography and comfortable breathing room
  */
 
 :root {
-  --color-navy-dark: #0a192f; /* Deep navy */
-  --color-surface-neutral: #1e293b; /* Neutral surfaces (slate/neutral) */
-  --color-observation-teal: #14b8a6; /* Teal */
-  --color-unresolved-amber: #f59e0b; /* Amber */
-  --color-contradiction-coral: #f43f5e; /* Coral */
+  --bg-deep: #090d16;
+  --bg-surface: #0f1626;
+  --bg-surface-elevated: #151f33;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.12);
+  --border-focus: rgba(20, 184, 166, 0.5);
+  
+  --color-teal-warm: #14b8a6;
+  --color-emerald-warm: #10b981;
+  --color-amber-warm: #f59e0b;
+  --color-coral-warm: #f43f5e;
+  --color-indigo-warm: #6366f1;
 }
 
 body {
-  background-color: var(--color-navy-dark);
-  color: #e2e8f0; /* Light text */
+  background-color: var(--bg-deep);
+  background-image: 
+    radial-gradient(ellipse 90% 60% at 50% -10%, rgba(20, 184, 166, 0.10), transparent 75%),
+    radial-gradient(ellipse 70% 50% at 90% 85%, rgba(99, 102, 241, 0.05), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 10% 70%, rgba(245, 158, 11, 0.04), transparent 60%);
+  background-attachment: fixed;
+  color: #e2e8f0;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Sleek Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Smooth Focus Rings */
+*:focus-visible {
+  outline: 2px solid rgba(20, 184, 166, 0.6);
+  outline-offset: 2px;
+}
+
+@layer utilities {
+  /* Warm tactile card styling */
+  .card-human {
+    background-color: rgba(15, 22, 38, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.07), 0 10px 25px -5px rgba(0, 0, 0, 0.35);
+  }
+
+  .card-human-interactive {
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .card-human-interactive:hover {
+    background-color: rgba(18, 27, 46, 0.88);
+    border-color: rgba(255, 255, 255, 0.14);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.12), 0 16px 36px -8px rgba(0, 0, 0, 0.45);
+    transform: translateY(-1px);
+  }
+
+  /* Tactile button classes */
+  .btn-primary-human {
+    background-image: linear-gradient(135deg, #14b8a6 0%, #10b981 100%);
+    color: #041212;
+    font-weight: 700;
+    box-shadow: 0 4px 14px 0 rgba(20, 184, 166, 0.25);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .btn-primary-human:hover {
+    background-image: linear-gradient(135deg, #2dd4bf 0%, #34d399 100%);
+    box-shadow: 0 6px 20px 0 rgba(20, 184, 166, 0.35);
+    transform: translateY(-0.5px);
+  }
+  .btn-primary-human:active {
+    transform: scale(0.98);
+  }
+
+  .btn-secondary-human {
+    background-color: rgba(21, 31, 51, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #e2e8f0;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .btn-secondary-human:hover {
+    background-color: rgba(30, 41, 65, 0.9);
+    border-color: rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+  }
+  .btn-secondary-human:active {
+    transform: scale(0.98);
+  }
 }
